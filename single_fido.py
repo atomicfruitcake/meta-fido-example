@@ -1,19 +1,19 @@
 from metaprogramming.fido import Fido
 
-class SingleMetaDog(type):
+class Singleton(type):
 
     _instances = {}
     def __call__(cls, *args, **kwargs):
 
         if cls not in cls._instances:
-            cls._instances[cls] = super(SingleMetaDog, cls).__call__(*args, **kwargs)
+            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
         return cls._instances[cls]
 
-class PetFido(Fido, metaclass=SingleMetaDog):
+class PetFido(Fido, metaclass=Singleton):
     pass
 
 
-def fido_example3():
+def fido_singleton_example():
     fido1 = PetFido()
     fido2 = PetFido()
     print(fido1)
@@ -25,4 +25,4 @@ def fido_example3():
 
 
 if __name__ == "__main__":
-    fido_example3()
+    fido_singleton_example()
